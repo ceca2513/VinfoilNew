@@ -399,14 +399,14 @@ public class Solution {
 		
 		
 		
-		org.vinfoil.ThreadHoldingConstraint1 thc1=new org.vinfoil.ThreadHoldingConstraint1();
-		org.vinfoil.ThreadHoldingConstraint2 thc2=new org.vinfoil.ThreadHoldingConstraint2();
-		org.vinfoil.ThreadHoldingConstraint3 thc3=new org.vinfoil.ThreadHoldingConstraint3();
-		org.vinfoil.ThreadHoldingConstraint4 thc4=new org.vinfoil.ThreadHoldingConstraint4();
-		org.vinfoil.ThreadHoldingConstraint5 thc5=new org.vinfoil.ThreadHoldingConstraint5();
-		org.vinfoil.ThreadHoldingConstraint6 thc6=new org.vinfoil.ThreadHoldingConstraint6();
-		org.vinfoil.ThreadHoldingConstraint7 thc7=new org.vinfoil.ThreadHoldingConstraint7();
-		org.vinfoil.ThreadHoldingConstraint8 thc8=new org.vinfoil.ThreadHoldingConstraint8();
+		org.vinfoil.thread.ThreadHoldingConstraint1 thc1=new org.vinfoil.thread.ThreadHoldingConstraint1();
+		org.vinfoil.thread.ThreadHoldingConstraint2 thc2=new org.vinfoil.thread.ThreadHoldingConstraint2();
+		org.vinfoil.thread.ThreadHoldingConstraint3 thc3=new org.vinfoil.thread.ThreadHoldingConstraint3();
+		org.vinfoil.thread.ThreadHoldingConstraint4 thc4=new org.vinfoil.thread.ThreadHoldingConstraint4();
+		org.vinfoil.thread.ThreadHoldingConstraint5 thc5=new org.vinfoil.thread.ThreadHoldingConstraint5();
+		org.vinfoil.thread.ThreadHoldingConstraint6 thc6=new org.vinfoil.thread.ThreadHoldingConstraint6();
+		org.vinfoil.thread.ThreadHoldingConstraint7 thc7=new org.vinfoil.thread.ThreadHoldingConstraint7();
+		org.vinfoil.thread.ThreadHoldingConstraint8 thc8=new org.vinfoil.thread.ThreadHoldingConstraint8();
 		//sada moram da napravim nove bez embedinga
 		
 		thc1.setDiscreteLane1(matrixdis1);thc1.setDiscreteLane2(matrixdis1);
@@ -483,14 +483,14 @@ public class Solution {
 		thc8.start();*/
 		
 		
-		/*org.vinfoil.ThreadHoldingConstraint11 thc11=new org.vinfoil.ThreadHoldingConstraint11();
-		org.vinfoil.ThreadHoldingConstraint21 thc21=new org.vinfoil.ThreadHoldingConstraint21();
-		org.vinfoil.ThreadHoldingConstraint31 thc31=new org.vinfoil.ThreadHoldingConstraint31();
-		org.vinfoil.ThreadHoldingConstraint41 thc41=new org.vinfoil.ThreadHoldingConstraint41();
-		org.vinfoil.ThreadHoldingConstraint51 thc51=new org.vinfoil.ThreadHoldingConstraint51();
-		org.vinfoil.ThreadHoldingConstraint61 thc61=new org.vinfoil.ThreadHoldingConstraint61();
-		org.vinfoil.ThreadHoldingConstraint71 thc71=new org.vinfoil.ThreadHoldingConstraint71();
-		org.vinfoil.ThreadHoldingConstraint81 thc81=new org.vinfoil.ThreadHoldingConstraint81();
+		/*org.vinfoil.thread.ThreadHoldingConstraint11 thc11=new org.vinfoil.thread.ThreadHoldingConstraint11();
+		org.vinfoil.thread.ThreadHoldingConstraint21 thc21=new org.vinfoil.thread.ThreadHoldingConstraint21();
+		org.vinfoil.thread.ThreadHoldingConstraint31 thc31=new org.vinfoil.thread.ThreadHoldingConstraint31();
+		org.vinfoil.thread.ThreadHoldingConstraint41 thc41=new org.vinfoil.thread.ThreadHoldingConstraint41();
+		org.vinfoil.thread.ThreadHoldingConstraint51 thc51=new org.vinfoil.thread.ThreadHoldingConstraint51();
+		org.vinfoil.thread.ThreadHoldingConstraint61 thc61=new org.vinfoil.thread.ThreadHoldingConstraint61();
+		org.vinfoil.thread.ThreadHoldingConstraint71 thc71=new org.vinfoil.thread.ThreadHoldingConstraint71();
+		org.vinfoil.thread.ThreadHoldingConstraint81 thc81=new org.vinfoil.thread.ThreadHoldingConstraint81();
 		//sada moram da napravim nove bez embedinga
 		if(X1min-20<0)
 			X1min=0;
@@ -690,7 +690,7 @@ public class Solution {
 		}*/
 	   /* org.vinfoil.Parallelogram ja=new org.vinfoil.Parallelogram ();
 	    ja.setX11(10);
-	    ja.setY11(15);
+	    ja.setY11(15);6
 	    ja.setX12(20);
 	    ja.setY12(15);
 	    ja.setX13(23);

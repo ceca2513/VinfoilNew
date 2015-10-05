@@ -1,5 +1,7 @@
 package org.vinfoil;
 
+import org.vinfoil.thread.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,11 +34,11 @@ public class OneOnOneRepass {
 		
 		
 		
-		ThreadHoldingConstraint11 thc11=new ThreadHoldingConstraint11(); 
-		ThreadHoldingConstraint21 thc21=new ThreadHoldingConstraint21(); 
-		ThreadHoldingConstraint31 thc31=new ThreadHoldingConstraint31(); 
-		ThreadHoldingConstraint41 thc41=new ThreadHoldingConstraint41(); 
-		ThreadHoldingConstraint51 thc51=new ThreadHoldingConstraint51(); 
+		ThreadHoldingConstraint11 thc11=new ThreadHoldingConstraint11();
+		ThreadHoldingConstraint21 thc21=new ThreadHoldingConstraint21();
+		ThreadHoldingConstraint31 thc31=new ThreadHoldingConstraint31();
+		ThreadHoldingConstraint41 thc41=new ThreadHoldingConstraint41();
+		ThreadHoldingConstraint51 thc51=new ThreadHoldingConstraint51();
 		ThreadHoldingConstraint61 thc61=new ThreadHoldingConstraint61(); 
 		ThreadHoldingConstraint71 thc71=new ThreadHoldingConstraint71(); 
 		ThreadHoldingConstraint81 thc81=new ThreadHoldingConstraint81(); 
@@ -58,67 +60,67 @@ public class OneOnOneRepass {
 		thc11.setX2min(X2min);thc11.setX2max(X2max);
 		thc11.setY1min(Y1min);thc11.setY1max(Y1max);
 		thc11.setY2min(Y2min);thc11.setY2max(Y2max);
-		thc11.setN1((int)lane1.getWidth());thc11.setN2((int)lane2.getWidth());
-		thc11.setM((int)lane1.getLength());thc11.setScanStep(ScanStep);
+		thc11.setN1((int) lane1.getWidth());thc11.setN2((int) lane2.getWidth());
+		thc11.setM((int) lane1.getLength());thc11.setScanStep(ScanStep);
 		
 		thc21.setDiscreteLane1(matrixdis1);thc21.setDiscreteLane2(matrixdis2);
 		thc21.setX1min(X1min);thc21.setX1max(X1max);
 		thc21.setX2min(X2min);thc21.setX2max(X2max);
 		thc21.setY1min(Y1min);thc21.setY1max(Y1max);
 		thc21.setY2min(Y2min);thc21.setY2max(Y2max);
-		thc21.setN1((int)lane1.getWidth());thc21.setN2((int)lane2.getWidth());
-		thc21.setM((int)lane1.getLength());thc21.setScanStep(ScanStep);
+		thc21.setN1((int) lane1.getWidth());thc21.setN2((int) lane2.getWidth());
+		thc21.setM((int) lane1.getLength());thc21.setScanStep(ScanStep);
 		
 		thc31.setDiscreteLane1(matrixdis1);thc31.setDiscreteLane2(matrixdis2);
 		thc31.setX1min(X1min);thc31.setX1max(X1max);
 		thc31.setX2min(X2min);thc31.setX2max(X2max);
 		thc31.setY1min(Y1min);thc31.setY1max(Y1max);
 		thc31.setY2min(Y2min);thc31.setY2max(Y2max);
-		thc31.setN1((int)lane1.getWidth());thc31.setN2((int)lane2.getWidth());
-		thc31.setM((int)lane1.getLength());thc31.setScanStep(ScanStep);
+		thc31.setN1((int) lane1.getWidth());thc31.setN2((int) lane2.getWidth());
+		thc31.setM((int) lane1.getLength());thc31.setScanStep(ScanStep);
 		
 		thc41.setDiscreteLane1(matrixdis1);thc41.setDiscreteLane2(matrixdis2);
 		thc41.setX1min(X1min);thc41.setX1max(X1max);
 		thc41.setX2min(X2min);thc41.setX2max(X2max);
 		thc41.setY1min(Y1min);thc41.setY1max(Y1max);
 		thc41.setY2min(Y2min);thc41.setY2max(Y2max);
-		thc41.setN1((int)lane1.getWidth());thc41.setN2((int)lane2.getWidth());
-		thc41.setM((int)lane1.getLength());thc41.setScanStep(ScanStep);
+		thc41.setN1((int) lane1.getWidth());thc41.setN2((int) lane2.getWidth());
+		thc41.setM((int) lane1.getLength());thc41.setScanStep(ScanStep);
 		
 		thc51.setDiscreteLane1(matrixdis1);thc51.setDiscreteLane2(matrixdis2);
 		thc51.setX1min(X1min);thc51.setX1max(X1max);
 		thc51.setX2min(X2min);thc51.setX2max(X2max);
 		thc51.setY1min(Y1min);thc51.setY1max(Y1max);
 		thc51.setY2min(Y2min);thc51.setY2max(Y2max);
-		thc51.setN1((int)lane1.getWidth());thc51.setN2((int)lane2.getWidth());
-		thc51.setM((int)lane1.getLength());thc51.setScanStep(ScanStep);
+		thc51.setN1((int) lane1.getWidth());thc51.setN2((int) lane2.getWidth());
+		thc51.setM((int) lane1.getLength());thc51.setScanStep(ScanStep);
 		
 		thc61.setDiscreteLane1(matrixdis1);thc61.setDiscreteLane2(matrixdis2);
 		thc61.setX1min(X1min);thc61.setX1max(X1max);
 		thc61.setX2min(X2min);thc61.setX2max(X2max);
 		thc61.setY1min(Y1min);thc61.setY1max(Y1max);
 		thc61.setY2min(Y2min);thc61.setY2max(Y2max);
-		thc61.setN1((int)lane1.getWidth());thc61.setN2((int)lane2.getWidth());
-		thc61.setM((int)lane1.getLength());thc61.setScanStep(ScanStep);
+		thc61.setN1((int) lane1.getWidth());thc61.setN2((int) lane2.getWidth());
+		thc61.setM((int) lane1.getLength());thc61.setScanStep(ScanStep);
 		
 		thc71.setDiscreteLane1(matrixdis1);thc71.setDiscreteLane2(matrixdis2);
 		thc71.setX1min(X1min);thc71.setX1max(X1max);
 		thc71.setX2min(X2min);thc71.setX2max(X2max);
 		thc71.setY1min(Y1min);thc71.setY1max(Y1max);
 		thc71.setY2min(Y2min);thc71.setY2max(Y2max);
-		thc71.setN1((int)lane1.getWidth());thc71.setN2((int)lane2.getWidth());
-		thc71.setM((int)lane1.getLength());thc71.setScanStep(ScanStep);
+		thc71.setN1((int) lane1.getWidth());thc71.setN2((int) lane2.getWidth());
+		thc71.setM((int) lane1.getLength());thc71.setScanStep(ScanStep);
 		
 		thc81.setDiscreteLane1(matrixdis1);thc81.setDiscreteLane2(matrixdis2);
 		thc81.setX1min(X1min);thc81.setX1max(X1max);
 		thc81.setX2min(X2min);thc81.setX2max(X2max);
 		thc81.setY1min(Y1min);thc81.setY1max(Y1max);
 		thc81.setY2min(Y2min);thc81.setY2max(Y2max);
-		thc81.setN1((int)lane1.getWidth());thc81.setN2((int)lane2.getWidth());
+		thc81.setN1((int) lane1.getWidth());thc81.setN2((int) lane2.getWidth());
 		thc81.setM((int)lane1.getLength());thc81.setScanStep(ScanStep);
 		
 
-		thc11.run(); 
+		/*thc11.run();
 		try{
 			thc11.join();
 			
@@ -165,8 +167,8 @@ public class OneOnOneRepass {
 		HS.addAll(thc51.getHS());
 		HS.addAll(thc61.getHS());
 		HS.addAll(thc71.getHS());
-		HS.addAll(thc81.getHS());
-		/*thc11.run(); 
+		HS.addAll(thc81.getHS());*/
+		thc11.run();
 		thc21.start();
 		thc31.run();
 		thc41.run();
@@ -181,7 +183,7 @@ public class OneOnOneRepass {
 		HS.addAll(thc51.getHS());
 		HS.addAll(thc61.getHS());
 		HS.addAll(thc71.getHS());
-		HS.addAll(thc81.getHS());*/
+		HS.addAll(thc81.getHS());
 		//uniting results 
 		return HS;
 	}

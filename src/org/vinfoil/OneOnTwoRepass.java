@@ -1,5 +1,7 @@
 package org.vinfoil;
 
+import org.vinfoil.thread.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -50,9 +52,9 @@ public class OneOnTwoRepass {
 		List<Direction1andDirection2> templist = Collections.synchronizedList(new ArrayList<Direction1andDirection2>());
 		ThreadHoldingConstraint11 thc11=new ThreadHoldingConstraint11(); 
 		ThreadHoldingConstraint21 thc21=new ThreadHoldingConstraint21(); 
-		ThreadHoldingConstraint31 thc31=new ThreadHoldingConstraint31(); 
+		ThreadHoldingConstraint31 thc31=new ThreadHoldingConstraint31();
 		ThreadHoldingConstraint41 thc41=new ThreadHoldingConstraint41(); 
-		ThreadHoldingConstraint51 thc51=new ThreadHoldingConstraint51(); 
+		ThreadHoldingConstraint51 thc51=new ThreadHoldingConstraint51();
 		ThreadHoldingConstraint61 thc61=new ThreadHoldingConstraint61(); 
 		ThreadHoldingConstraint71 thc71=new ThreadHoldingConstraint71(); 
 		ThreadHoldingConstraint81 thc81=new ThreadHoldingConstraint81(); 
