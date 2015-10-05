@@ -34,14 +34,14 @@ public class OneOnOneRepass {
 		
 		
 		
-		ThreadHoldingConstraint11 thc11=new ThreadHoldingConstraint11();
-		ThreadHoldingConstraint21 thc21=new ThreadHoldingConstraint21();
-		ThreadHoldingConstraint31 thc31=new ThreadHoldingConstraint31();
-		ThreadHoldingConstraint41 thc41=new ThreadHoldingConstraint41();
-		ThreadHoldingConstraint51 thc51=new ThreadHoldingConstraint51();
-		ThreadHoldingConstraint61 thc61=new ThreadHoldingConstraint61(); 
-		ThreadHoldingConstraint71 thc71=new ThreadHoldingConstraint71(); 
-		ThreadHoldingConstraint81 thc81=new ThreadHoldingConstraint81(); 
+		ThreadHoldingConstraint11 thc11=new ThreadHoldingConstraint11(HS);
+		ThreadHoldingConstraint21 thc21=new ThreadHoldingConstraint21(HS);
+		ThreadHoldingConstraint31 thc31=new ThreadHoldingConstraint31(HS);
+		ThreadHoldingConstraint41 thc41=new ThreadHoldingConstraint41(HS);
+		ThreadHoldingConstraint51 thc51=new ThreadHoldingConstraint51(HS);
+		ThreadHoldingConstraint61 thc61=new ThreadHoldingConstraint61(HS);
+		ThreadHoldingConstraint71 thc71=new ThreadHoldingConstraint71(HS);
+		ThreadHoldingConstraint81 thc81=new ThreadHoldingConstraint81(HS);
 		//sada moram da napravim nove bez embedinga
 		if(X1min-ScanStep<0)
 			X1min=0;
@@ -119,22 +119,14 @@ public class OneOnOneRepass {
 		thc81.setN1((int) lane1.getWidth());thc81.setN2((int) lane2.getWidth());
 		thc81.setM((int)lane1.getLength());thc81.setScanStep(ScanStep);
 
-		thc11.run();
-		thc21.run();
-		thc31.run();
-		thc41.run();
-		thc51.run();
-		thc61.run();
-		thc71.run();
-		thc81.run();
-		HS.addAll(thc11.getHS());
-		HS.addAll(thc21.getHS());
-		HS.addAll(thc31.getHS());
-		HS.addAll(thc41.getHS());
-		HS.addAll(thc51.getHS());
-		HS.addAll(thc61.getHS());
-		HS.addAll(thc71.getHS());
-		HS.addAll(thc81.getHS());
+		thc11.start();
+		thc21.start();
+		thc31.start();
+		thc41.start();
+		thc51.start();
+		thc61.start();
+		thc71.start();
+		thc81.start();
 		//uniting results 
 		return HS;
 	}

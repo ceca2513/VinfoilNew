@@ -119,12 +119,11 @@ public class ThreadHoldingConstraint81 extends Thread{
   	@Override
   	public void run() {
   		// TODO Auto-generated method stub
-  		this.HS=this.Direction8();
+  		this.HS.addAll(Direction8());
   		System.out.println("eighth thread "+this.HS.size());
   	}
-  	public ThreadHoldingConstraint81(){
-  		//constructor
-  		super();
+  	public ThreadHoldingConstraint81(List<HoldingResult> HS){
+		this.HS = HS;
   	}
   	//matrices need to be same dimension we zero pad the smaller, the m=CPC
   	public int [][] SetingMaticesToSameDimension(){

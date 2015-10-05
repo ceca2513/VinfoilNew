@@ -119,12 +119,11 @@ public class ThreadHoldingConstraint71 extends Thread{
   	@Override
   	public void run() {
   		// TODO Auto-generated method stub
-  		this.HS=this.Direction7();
+  		this.HS.addAll(Direction7());
   		System.out.println("seventh thread "+this.HS.size());
   	}
-  	public ThreadHoldingConstraint71(){
-  		//constructor
-  		super();
+  	public ThreadHoldingConstraint71(List<HoldingResult> HS){
+		this.HS = HS;
   	}
   	//matrices need to be same dimension we zero pad the smaller, the m=CPC
   	public int [][] SetingMaticesToSameDimension(){
