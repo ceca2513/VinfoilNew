@@ -21,28 +21,28 @@ public class Solution {
 		float PT=0;
 		float PR=0;
 		float PP=0;
-		
+
 		InitialFoilRoll IFR=new InitialFoilRoll();
 		IFR.setLength(10000000);
 		IFR.setStep(10);
 		ArrayList <Integer> IFRW=new ArrayList<Integer>();
 		//Initial foil roll info
-		
+
 		Paper P=new Paper();
 		P.setPaperLength(682);
 		P.setPaperWidth(1008);
 		CenteringToPS CTPS=new CenteringToPS();
 		//org.vinfoil.Paper info
-		
+
 		PrintingSheet PS=new PrintingSheet();
 		PS.setLength(942);
 		PS.setWidth(1060);
 		PS.setCPC(942);
 		//Printing sheet info
-		
+
 		MinAndMax MyStrategy1=new MinAndMax();
 		Patterns Shape=new Patterns();
-		
+
 		int NK=0;//number of knifes
 		NK=2;
 		//Paterns info
@@ -51,18 +51,18 @@ public class Solution {
 		System.out.println("rectangles "+Shape.getRectangels().size());
 		System.out.println("triangles "+Shape.getTriangels().size());
 		System.out.println("parallelograms "+Shape.getParallelograms().size());
-		
+
 		ArrayList <Parallelogram> MyListOfParallelograms=new ArrayList<Parallelogram>();
 		ArrayList <Rectangel> MyListOfRectangels=new ArrayList<Rectangel>();
 		ArrayList <Triangel> MyListOfTriangels=new ArrayList<Triangel>();
-		
+
 		P.setOffsetx1(CTPS.CenteringOfInitialRoll(PS.getWidth(),P));//New position of the paper according to PScoordiante
 		System.out.println("offset"+P.getOffsetx1());
 		paperwidth=P.getPaperWidth()+P.getOffsetx1();//need to do something about this!!!!!!!!!!
 		System.out.println("offset2 "+paperwidth);
 		int offset=(int) P.getOffsetx1();
 		int paperwidth1=(int) P.getPaperWidth();
-		
+
 	/*org.vinfoil.CreateLanes nj=new org.vinfoil.CreateLanes ();
 		org.vinfoil.FWL q=new org.vinfoil.FWL ();
 		q=nj.CreateLaneForAParalelogram(PAR1);
@@ -152,7 +152,7 @@ public class Solution {
 			System.out.println("kraj "+x.get(i).End);
 			System.out.println("sirina je "+x.get(i).Width);
 		}*/
-		
+
 		//t=ovl.CheckOverlapingOfTwoLanes(MyLane1, MyLane2);
 		/*System.out.println(t);
 		g.add(MyLane1);
@@ -193,7 +193,7 @@ public class Solution {
 		System.out.println("merging start "+NewLaneMerging.Start);
 		System.out.println("merging end "+NewLaneMerging.End);
 		System.out.println("merging width "+NewLaneMerging.Width);*/
-		
+
 
 		AdditionalStatistic as=new AdditionalStatistic ();
 		for(int i=0;i<Shape.getRectangels().size();i++){
@@ -203,7 +203,7 @@ public class Solution {
 			MyListOfRectangels.add(Rtemp);
 			if(5+P.getOffsetx1()>Rtemp.getX11()||5+P.getOffsetx1()>Rtemp.getX12()||Rtemp.getX11()<P.getOffsetx1()-5||Rtemp.getX12()<P.getOffsetx1()-5)
 				System.out.println("WARNING the inputed data is not 5mm from the edge of the paper, this will cause inccorect output result R");
-			
+
 		}
 		//while(MyListOfTriangles!=null){
 			for(int j=0;j<Shape.getTriangels().size();j++){
@@ -214,7 +214,7 @@ public class Solution {
 			MyListOfTriangels.add(Ttemp);
 			if(5+P.getOffsetx1()>Ttemp.getX11()||5+P.getOffsetx1()>Ttemp.getX12()||5+P.getOffsetx1()>Ttemp.getX13()||Ttemp.getX11()<P.getOffsetx1()-5||Ttemp.getX12()<P.getOffsetx1()-5||Ttemp.getX13()<P.getOffsetx1()-5)
 				System.out.println("WARNING the inputed data is not 5mm from the edge of the paper, this will cause inccorect output result T");
-		
+
 		}
 		//while(MyListOfParalelograms!=null){
 			for(int k=0;k<Shape.getParallelograms().size();k++){
@@ -226,13 +226,13 @@ public class Solution {
 			MyListOfParallelograms.add(PARtemp);
 			if(5+P.getOffsetx1()>PARtemp.getX11()||5+P.getOffsetx1()>PARtemp.getX12()||5+P.getOffsetx1()>PARtemp.getX13()||PARtemp.getX11()<P.getOffsetx1()-5||PARtemp.getX12()<P.getOffsetx1()-5||PARtemp.getX13()<P.getOffsetx1()-5)
 				System.out.println("WARNING the inputed data is not 5mm from the edge of the paper, this will cause inccorect output result P");
-			
+
 		}
-			
+
 			ArrayList <Float> PTriangels=new ArrayList <Float> ();
 			ArrayList <Float> PRectangels=new ArrayList <Float> ();
 			ArrayList <Float> PParallelograms=new ArrayList <Float> ();
-			
+
 			float sumr=0;
 			float sumt=0;
 			float sump=0;
@@ -252,17 +252,17 @@ public class Solution {
 				PP=as.SurfaceAreaOfParalleogram(Ptemp.getA(), Ptemp.getHa());
 				sump+=PP;
 			}
-			
+
 		float sum=sumr+sumt+sump;
 		System.out.println("The total area with bounded patterns is "+sum/10000);
 		System.out.println("The area of paper "+(P.getPaperLength()*P.getPaperWidth())/10000);
 
 			Strategy1 stg1=new Strategy1 ();
 			stg1.Str1(MyListOfParallelograms, MyListOfRectangels, MyListOfTriangels, IFR,PS.getCPC());
-		
-		
+
+
 			IFRW=IFR.getWidths(IFR.getStep());
-		
+
 		Strategy2 Stra2=new Strategy2 ();
 		InitialSetOfLanes Set0=new InitialSetOfLanes ();
 		ArrayList <FWL> newSet=new ArrayList <FWL> ();
@@ -272,7 +272,7 @@ public class Solution {
 		float mnwidth=0,extension=0,mnwidth1=0;
 		int in=0;
 		Extending e=new Extending ();
-		
+
 		newSet=Set0.InitialS0(MyListOfParallelograms, MyListOfTriangels, MyListOfRectangels, PS.getCPC());
 		System.out.println("number of lanes in initial set with overlapping "+newSet.size());
 		/* for(int i=0;i<newSet.size();i++)
@@ -282,7 +282,7 @@ public class Solution {
 				System.out.println("ends "+newSet.get(i).End);
 				System.out.println("and is of width "+newSet.get(i).Width);
 		 }*/
-		 
+
 		newSet1=Set0.CreatingS0(newSet, false,PS.getCPC());
 		System.out.println("number of lanes in initial set without overlapping "+newSet1.size());
 		 for(int i=0;i<newSet1.size();i++)
@@ -292,7 +292,7 @@ public class Solution {
 				System.out.println("ends "+newSet1.get(i).getEnd());
 				System.out.println("and is of width "+newSet1.get(i).getWidth());
 		 }
-		 
+
 		FWL experimentdis=new FWL ();
 		experimentdis=newSet1.get(0);
 		Discretization tempdis=new Discretization ();
@@ -309,8 +309,8 @@ public class Solution {
 		test3=newSet1.get(0);
 		HoldingConstraints testing=new HoldingConstraints();
 		HoldingResult res=new HoldingResult();
-		
-		
+
+
 		int [][] matrixx1=new int [10][10];
 		int [][] matrixx2=new int [10][10];
 		int [][] matrixx3=new int [10][10];
@@ -648,8 +648,8 @@ public class Solution {
 		oneOnTwo.OneOnTwoRepassRun(newSet1.get(0), newSet1.get(0), newSet1.get(0), Shape, 20);*/
 		Strategy3and4 rezultat=new Strategy3and4();
 		rezultat.Strategy3AND4(newSet1, 5, offset, paperwidth1, Shape, 20,IFR);
-		
-	
+
+
 		 //Using drawing to show results
       /*  org.vinfoil.DrawPanels panel1 = new org.vinfoil.DrawPanels(test1,test2);
         panel1.allPatterns=Shape;
@@ -803,31 +803,31 @@ public class Solution {
 				}
 				System.out.print("\n");
 			}*/
-		
-		
+
+
 		newSet=Stra2.St2(newSet1, paperwidth, P.getOffsetx1(), NK);
 		System.out.println("number of lanes after strategy 2 "+newSet.size());
 		 for(int i=0;i<newSet.size();i++)
 		  {
-			 
+
 			 System.out.println("Lane "+i);
 				System.out.println("begins "+newSet.get(i).getStart());
 				System.out.println("ends "+newSet.get(i).getEnd());
 				System.out.println("and is of width "+newSet.get(i).getWidth());
 		 }
-		 
+
 		 ArrayList <Float> distance=new ArrayList <Float> ();
 		 for(int i=0;i<newSet.size()-1;i++){
 			 distance.add(newSet.get(i+1).getEnd()-newSet.get(i).getStart());
 		 }
-		
+
 		 float mnwidth2=0;
 		 for(int i=0;i<newSet.size();i++)
 				mnwidth2+=newSet.get(i).getWidth();
 			System.out.println("Minimum needed width before rounding "+mnwidth2);
 			System.out.println("The foil consumption without rounding "+(mnwidth2*PS.getCPC())/10000);
-	
-		 
+
+
 		 KnivesConstraints round=new KnivesConstraints();
 		 newSet=round.RoundingLanaesToResolution(newSet, paperwidth, P.getOffsetx1());
 		 System.out.println("after rounding");
@@ -846,9 +846,9 @@ public class Solution {
 			mnwidth+=newSet.get(i).getWidth();
 		System.out.println("Minimum needed width "+mnwidth);
 		System.out.println("The foil consumption after rounding "+(mnwidth*PS.getCPC())/10000);
-		
-		
-		
+
+
+
 		while((in<IFRW.size())&&mnwidth>IFRW.get(in)){
 
 			in++;
@@ -858,26 +858,26 @@ public class Solution {
 			extension=IFRW.get(0)-mnwidth;
 		else extension=IFRW.get(in)-mnwidth;
 		System.out.println("extension "+extension);
-		
+
 		if(extension!=0){
 		newSet2=e.ExtendingAll1(newSet, (int) extension, paperwidth, P.getOffsetx1());
 		System.out.println(newSet2.size());
-		numOfLanes=newSet2.size(); 
+		numOfLanes=newSet2.size();
 		for(int i=0;i<newSet2.size();i++){
 			mnwidth1+=newSet2.get(i).getWidth();
 			System.out.println("Lane "+i);
 			System.out.println("begins "+newSet2.get(i).getStart());
-			
+
 			System.out.println("ends "+newSet2.get(i).getEnd());
 			System.out.println("and is of width "+newSet2.get(i).getWidth());
 		}
 		System.out.println("Initial foil roll  "+mnwidth1);
-		
+
 		} else{
-			numOfLanes=newSet.size(); 
+			numOfLanes=newSet.size();
 			for(int i=0;i<newSet.size();i++)
 			  {
-				
+
 				 System.out.println("Lane "+i);
 					System.out.println("begins "+newSet.get(i).getStart());
 					System.out.println("ends "+newSet.get(i).getEnd());
@@ -894,14 +894,14 @@ public class Solution {
 		foilWidth=mnwidth1;
 		System.out.println("Initial foil roll  "+foilWidth);
 		}
-		
-		
-		
+
+
+
 		try {
             int str = (int) mnwidth;
            // File newTextFile = new File("C:\\Users\\sstojano\\workspace\\Vinfoil\\thetextfile.txt");
 
-          
+
             File outFile = new File ("output.txt");
             FileWriter fWriter = new FileWriter (outFile);
             PrintWriter pWriter = new PrintWriter (fWriter);
@@ -916,7 +916,7 @@ public class Solution {
             		pWriter.println (newSet.get(i).getStart());//position i
             		            	}
             	for(int i=7-newSet.size();i<=7;i++){
-            		pWriter.println (0);//position 
+            		pWriter.println (0);//position
 
             	}
             	for(int i=0;i<newSet.size();i++){
@@ -925,13 +925,13 @@ public class Solution {
             	for(int i=7-newSet.size();i<=7;i++){
             		pWriter.println (0);// Width position 1
             	}
-            	 
+
             }else{
             	for(int i=0;i<newSet2.size();i++){
             		pWriter.println (newSet2.get(i).getStart());//position i
             	}
             	for(int i=7-newSet2.size();i<=7;i++){
-            		pWriter.println (0);//position 
+            		pWriter.println (0);//position
             	}
             	for(int i=0;i<newSet2.size();i++){
             		pWriter.println (newSet2.get(i).getWidth());// Width position 1
@@ -939,9 +939,9 @@ public class Solution {
             	for(int i=7-newSet2.size();i<=7;i++){
             		pWriter.println (0);// Width position 1
             	}
-            	
+
             }
-           
+
             pWriter.println (0);// Offset position 1
             pWriter.println (0);// Offset position 2
             pWriter.println (0);// Offset position 3
@@ -949,7 +949,7 @@ public class Solution {
             pWriter.println (0);// Offset position 5
             pWriter.println (0);// Offset position 6
             pWriter.println (0);// Offset position 7
-            
+
 
             pWriter.close();
 
@@ -957,20 +957,21 @@ public class Solution {
             //do stuff with exception
             iox.printStackTrace();
         }
-		
-		
-		 
-		   long estimatedTime = System.nanoTime() - startTime;
-		 System.out.println("Execution time in nanosec "+estimatedTime);
+
+		while (Thread.activeCount() > 2) {
+		}
+
+		long estimatedTime = System.nanoTime() - startTime;
+		System.out.println("Execution time in nanosec "+estimatedTime);
 		double ext=estimatedTime/1000000000;
 		System.out.println("Execution time in sec "+ext);
-		
-		
+
+
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 
 }

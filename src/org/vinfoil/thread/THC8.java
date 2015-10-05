@@ -140,23 +140,10 @@ public class THC8 extends Thread{
   	public void run() {
   		// TODO Auto-generated method stub
   		HoldingResult temp=new HoldingResult();
-  		this.HS=this.Direction8();
-  		synchronized (HS){
-  			Iterator<Direction1andDirection2> iterator = HS.iterator(); 
-  			System.out.println("eighth thread 1 "+this.HS.size());
-  		      /* while (iterator.hasNext()){
-  		    	 temp=iterator.next();
-  				System.out.println("results of first thread direction 1 "+temp.getDirection());
-  				System.out.println("results of first thread shiftX 1 "+temp.getShiftX());
-  				System.out.println("results of first thread ShiftY 1 "+temp.getShiftY());
-  		
-  		       }*/
-  		}
-  		
+  		this.HS.addAll(Direction8());
   	}
-  	public THC8(){
-  		//constructor
-  		super();
+  	public THC8(List<Direction1andDirection2> HS){
+  		this.HS = HS;
   	}
   	//matrices need to be same dimension we zero pad the smaller, the m=CPC
   	public int [][] SetingMaticesToSameDimension(){

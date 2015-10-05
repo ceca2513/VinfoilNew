@@ -141,12 +141,11 @@ public class THC5 extends Thread{
   	@Override
   	public void run() {
   		// TODO Auto-generated method stub
-  		this.HS=this.Direction5();
+  		this.HS.addAll(Direction5());
   		System.out.println("fifth thread 1 "+this.HS.size());
   	}
-  	public THC5(){
-  		//constructor
-  		super();
+  	public THC5(List<Direction1andDirection2> HS){
+		this.HS = HS;
   	}
   	//matrices need to be same dimension we zero pad the smaller, the m=CPC
   	public int [][] SetingMaticesToSameDimension(){

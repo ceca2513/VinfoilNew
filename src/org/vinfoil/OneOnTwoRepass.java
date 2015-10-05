@@ -59,14 +59,14 @@ public class OneOnTwoRepass {
         ThreadHoldingConstraint61 thc61 = new ThreadHoldingConstraint61(HS);
         ThreadHoldingConstraint71 thc71 = new ThreadHoldingConstraint71(HS);
         ThreadHoldingConstraint81 thc81 = new ThreadHoldingConstraint81(HS);
-        THC1 thc1 = new THC1();
-        THC2 thc2 = new THC2();
-        THC3 thc3 = new THC3();
-        THC4 thc4 = new THC4();
-        THC5 thc5 = new THC5();
-        THC6 thc6 = new THC6();
-        THC7 thc7 = new THC7();
-        THC8 thc8 = new THC8();
+        THC1 thc1 = new THC1(templist);
+        THC2 thc2 = new THC2(templist);
+        THC3 thc3 = new THC3(templist);
+        THC4 thc4 = new THC4(templist);
+        THC5 thc5 = new THC5(templist);
+        THC6 thc6 = new THC6(templist);
+        THC7 thc7 = new THC7(templist);
+        THC8 thc8 = new THC8(templist);
         //sada moram da napravim nove bez embedinga
         if (X1min - ScanStep < 0)
             X1min = 0;
@@ -225,433 +225,410 @@ public class OneOnTwoRepass {
         int i = 0;
         //idemo jedan po jedan
         //direction 1
-        synchronized (HS) {
-            Iterator<HoldingResult> iterator1 = HS.iterator();
-            while (iterator1.hasNext() && t == false) {
+        Iterator<HoldingResult> iterator1 = HS.iterator();
+        while (iterator1.hasNext() && t == false) {
 
-                //napravi formulu za racunanje novih min and max za novu lane
-                int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
-                int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
-                int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
-                int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
-                int X1minTemp = X1min;
-                int X1maxTemp = X1max;
-                int Y1minTemp = Y1min;
-                int Y1maxTemp = Y1max;
-                if (X1minTemp >= X2minTemp)
-                    X1minTemp = X2minTemp;
-                if (X1maxTemp <= X2maxTemp)
-                    X1maxTemp = X2maxTemp;
-                if (Y1minTemp >= Y2minTemp)
-                    Y1minTemp = Y2minTemp;
-                if (Y1maxTemp <= Y2maxTemp)
-                    Y1maxTemp = Y2maxTemp;
-                //pozovi objdeinjavanje iz discretization
-                int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
-                //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
-                thc1.setDiscreteLane1(matrixdis5);
-                thc1.setDiscreteLane2(matrixdis4);
-                thc1.setX1min(X1minTemp);
-                thc1.setX1max(X1maxTemp);
-                thc1.setX2min(X3min);
-                thc1.setX2max(X3max);
-                thc1.setY1min(Y1minTemp);
-                thc1.setY1max(Y1maxTemp);
-                thc1.setY2min(Y3min);
-                thc1.setY2max(Y3max);
-                thc1.setDirection1(HS.get(i).getDirection());
-                thc1.setShiftXForDirection1(HS.get(i).getShiftX());
-                thc1.setShiftYForDirection1(HS.get(i).getShiftY());
-                thc1.setN1((int) lane1.getWidth());
-                thc1.setN2((int) lane3.getWidth());
-                thc1.setM((int) lane1.getLength());
-                thc1.setScanStep(ScanStep);
+            //napravi formulu za racunanje novih min and max za novu lane
+            int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
+            int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
+            int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
+            int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
+            int X1minTemp = X1min;
+            int X1maxTemp = X1max;
+            int Y1minTemp = Y1min;
+            int Y1maxTemp = Y1max;
+            if (X1minTemp >= X2minTemp)
+                X1minTemp = X2minTemp;
+            if (X1maxTemp <= X2maxTemp)
+                X1maxTemp = X2maxTemp;
+            if (Y1minTemp >= Y2minTemp)
+                Y1minTemp = Y2minTemp;
+            if (Y1maxTemp <= Y2maxTemp)
+                Y1maxTemp = Y2maxTemp;
+            //pozovi objdeinjavanje iz discretization
+            int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
+            //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
+            thc1.setDiscreteLane1(matrixdis5);
+            thc1.setDiscreteLane2(matrixdis4);
+            thc1.setX1min(X1minTemp);
+            thc1.setX1max(X1maxTemp);
+            thc1.setX2min(X3min);
+            thc1.setX2max(X3max);
+            thc1.setY1min(Y1minTemp);
+            thc1.setY1max(Y1maxTemp);
+            thc1.setY2min(Y3min);
+            thc1.setY2max(Y3max);
+            thc1.setDirection1(HS.get(i).getDirection());
+            thc1.setShiftXForDirection1(HS.get(i).getShiftX());
+            thc1.setShiftYForDirection1(HS.get(i).getShiftY());
+            thc1.setN1((int) lane1.getWidth());
+            thc1.setN2((int) lane3.getWidth());
+            thc1.setM((int) lane1.getLength());
+            thc1.setScanStep(ScanStep);
 
-                thc1.run();
-                templist.addAll(thc1.getHS());
+            thc1.start();
 
-                i++;
-                if (templist.size() > 0) {
-                    t = true;
-
-                }
+            i++;
+            if (templist.size() > 0) {
+                t = true;
 
             }
+
         }
         //direction 2
         i = 0;
-        synchronized (HS) {
-            Iterator<HoldingResult> iterator1 = HS.iterator();
-            while (iterator1.hasNext() && t == false) {
-                //napravi formulu za racunanje novih min and max za novu lane
-                int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
-                int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
-                int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
-                int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
-                int X1minTemp = X1min;
-                int X1maxTemp = X1max;
-                int Y1minTemp = Y1min;
-                int Y1maxTemp = Y1max;
-                if (X1minTemp >= X2minTemp)
-                    X1minTemp = X2minTemp;
-                if (X1maxTemp <= X2maxTemp)
-                    X1maxTemp = X2maxTemp;
-                if (Y1minTemp >= Y2minTemp)
-                    Y1minTemp = Y2minTemp;
-                if (Y1maxTemp <= Y2maxTemp)
-                    Y1maxTemp = Y2maxTemp;
-                //pozovi objdeinjavanje iz discretization
-                int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
-                //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
+        iterator1 = HS.iterator();
+        while (iterator1.hasNext() && t == false) {
+            //napravi formulu za racunanje novih min and max za novu lane
+            int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
+            int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
+            int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
+            int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
+            int X1minTemp = X1min;
+            int X1maxTemp = X1max;
+            int Y1minTemp = Y1min;
+            int Y1maxTemp = Y1max;
+            if (X1minTemp >= X2minTemp)
+                X1minTemp = X2minTemp;
+            if (X1maxTemp <= X2maxTemp)
+                X1maxTemp = X2maxTemp;
+            if (Y1minTemp >= Y2minTemp)
+                Y1minTemp = Y2minTemp;
+            if (Y1maxTemp <= Y2maxTemp)
+                Y1maxTemp = Y2maxTemp;
+            //pozovi objdeinjavanje iz discretization
+            int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
+            //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
 
-                thc2.setDiscreteLane1(matrixdis5);
-                thc2.setDiscreteLane2(matrixdis4);
-                thc2.setX1min(X1minTemp);
-                thc2.setX1max(X1maxTemp);
-                thc2.setX2min(X3min);
-                thc2.setX2max(X3max);
-                thc2.setY1min(Y1minTemp);
-                thc2.setY1max(Y1maxTemp);
-                thc2.setY2min(Y3min);
-                thc2.setY2max(Y3max);
-                thc2.setN1((int) lane1.getWidth());
-                thc2.setN2((int) lane3.getWidth());
-                thc2.setM((int) lane1.getLength());
-                thc2.setScanStep(ScanStep);
-                thc2.setDirection1(HS.get(i).getDirection());
-                thc2.setShiftXForDirection1(HS.get(i).getShiftX());
-                thc2.setShiftYForDirection1(HS.get(i).getShiftY());
+            thc2.setDiscreteLane1(matrixdis5);
+            thc2.setDiscreteLane2(matrixdis4);
+            thc2.setX1min(X1minTemp);
+            thc2.setX1max(X1maxTemp);
+            thc2.setX2min(X3min);
+            thc2.setX2max(X3max);
+            thc2.setY1min(Y1minTemp);
+            thc2.setY1max(Y1maxTemp);
+            thc2.setY2min(Y3min);
+            thc2.setY2max(Y3max);
+            thc2.setN1((int) lane1.getWidth());
+            thc2.setN2((int) lane3.getWidth());
+            thc2.setM((int) lane1.getLength());
+            thc2.setScanStep(ScanStep);
+            thc2.setDirection1(HS.get(i).getDirection());
+            thc2.setShiftXForDirection1(HS.get(i).getShiftX());
+            thc2.setShiftYForDirection1(HS.get(i).getShiftY());
 
-                thc2.start();
-                templist.addAll(thc2.getHS());
+            thc2.start();
 
-                i++;
-                if (templist.size() > 0) {
-                    t = true;
+            i++;
+            if (templist.size() > 0) {
+                t = true;
 
-                }
             }
         }
         //direction3
         i = 0;
-        synchronized (HS) {
-            Iterator<HoldingResult> iterator1 = HS.iterator();
-            while (iterator1.hasNext() && t == false) {
-                //napravi formulu za racunanje novih min and max za novu lane
-                int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
-                int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
-                int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
-                int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
-                int X1minTemp = X1min;
-                int X1maxTemp = X1max;
-                int Y1minTemp = Y1min;
-                int Y1maxTemp = Y1max;
-                if (X1minTemp >= X2minTemp)
-                    X1minTemp = X2minTemp;
-                if (X1maxTemp <= X2maxTemp)
-                    X1maxTemp = X2maxTemp;
-                if (Y1minTemp >= Y2minTemp)
-                    Y1minTemp = Y2minTemp;
-                if (Y1maxTemp <= Y2maxTemp)
-                    Y1maxTemp = Y2maxTemp;
-                //pozovi objdeinjavanje iz discretization
-                int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
-                //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
+        iterator1 = HS.iterator();
+        while (iterator1.hasNext() && t == false) {
+            //napravi formulu za racunanje novih min and max za novu lane
+            int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
+            int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
+            int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
+            int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
+            int X1minTemp = X1min;
+            int X1maxTemp = X1max;
+            int Y1minTemp = Y1min;
+            int Y1maxTemp = Y1max;
+            if (X1minTemp >= X2minTemp)
+                X1minTemp = X2minTemp;
+            if (X1maxTemp <= X2maxTemp)
+                X1maxTemp = X2maxTemp;
+            if (Y1minTemp >= Y2minTemp)
+                Y1minTemp = Y2minTemp;
+            if (Y1maxTemp <= Y2maxTemp)
+                Y1maxTemp = Y2maxTemp;
+            //pozovi objdeinjavanje iz discretization
+            int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
+            //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
 
-                thc3.setDiscreteLane1(matrixdis5);
-                thc3.setDiscreteLane2(matrixdis4);
-                thc3.setX1min(X1minTemp);
-                thc3.setX1max(X1maxTemp);
-                thc3.setX2min(X3min);
-                thc3.setX2max(X3max);
-                thc3.setY1min(Y1minTemp);
-                thc3.setY1max(Y1maxTemp);
-                thc3.setY2min(Y3min);
-                thc3.setY2max(Y3max);
-                thc3.setN1((int) lane1.getWidth());
-                thc3.setN2((int) lane3.getWidth());
-                thc3.setM((int) lane1.getLength());
-                thc3.setScanStep(ScanStep);
-                thc3.setDirection1(HS.get(i).getDirection());
-                thc3.setShiftXForDirection1(HS.get(i).getShiftX());
-                thc3.setShiftYForDirection1(HS.get(i).getShiftY());
+            thc3.setDiscreteLane1(matrixdis5);
+            thc3.setDiscreteLane2(matrixdis4);
+            thc3.setX1min(X1minTemp);
+            thc3.setX1max(X1maxTemp);
+            thc3.setX2min(X3min);
+            thc3.setX2max(X3max);
+            thc3.setY1min(Y1minTemp);
+            thc3.setY1max(Y1maxTemp);
+            thc3.setY2min(Y3min);
+            thc3.setY2max(Y3max);
+            thc3.setN1((int) lane1.getWidth());
+            thc3.setN2((int) lane3.getWidth());
+            thc3.setM((int) lane1.getLength());
+            thc3.setScanStep(ScanStep);
+            thc3.setDirection1(HS.get(i).getDirection());
+            thc3.setShiftXForDirection1(HS.get(i).getShiftX());
+            thc3.setShiftYForDirection1(HS.get(i).getShiftY());
 
-                thc3.run();
-                templist.addAll(thc3.getHS());
+            thc3.start();
 
-                i++;
-                if (templist.size() > 0) {
-                    t = true;
+            i++;
+            if (templist.size() > 0) {
+                t = true;
 
-                }
             }
         }
         //direction4
         i = 0;
-        synchronized (HS) {
-            Iterator<HoldingResult> iterator1 = HS.iterator();
-            while (iterator1.hasNext() && t == false) {
-                //napravi formulu za racunanje novih min and max za novu lane
-                int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
-                int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
-                int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
-                int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
-                int X1minTemp = X1min;
-                int X1maxTemp = X1max;
-                int Y1minTemp = Y1min;
-                int Y1maxTemp = Y1max;
-                if (X1minTemp >= X2minTemp)
-                    X1minTemp = X2minTemp;
-                if (X1maxTemp <= X2maxTemp)
-                    X1maxTemp = X2maxTemp;
-                if (Y1minTemp >= Y2minTemp)
-                    Y1minTemp = Y2minTemp;
-                if (Y1maxTemp <= Y2maxTemp)
-                    Y1maxTemp = Y2maxTemp;
-                //pozovi objdeinjavanje iz discretization
-                int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
-                //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
+        iterator1 = HS.iterator();
+        while (iterator1.hasNext() && t == false) {
+            //napravi formulu za racunanje novih min and max za novu lane
+            int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
+            int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
+            int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
+            int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
+            int X1minTemp = X1min;
+            int X1maxTemp = X1max;
+            int Y1minTemp = Y1min;
+            int Y1maxTemp = Y1max;
+            if (X1minTemp >= X2minTemp)
+                X1minTemp = X2minTemp;
+            if (X1maxTemp <= X2maxTemp)
+                X1maxTemp = X2maxTemp;
+            if (Y1minTemp >= Y2minTemp)
+                Y1minTemp = Y2minTemp;
+            if (Y1maxTemp <= Y2maxTemp)
+                Y1maxTemp = Y2maxTemp;
+            //pozovi objdeinjavanje iz discretization
+            int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
+            //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
 
-                thc4.setDiscreteLane1(matrixdis5);
-                thc4.setDiscreteLane2(matrixdis4);
-                thc4.setX1min(X1minTemp);
-                thc4.setX1max(X1maxTemp);
-                thc4.setX2min(X3min);
-                thc4.setX2max(X3max);
-                thc4.setY1min(Y1minTemp);
-                thc4.setY1max(Y1maxTemp);
-                thc4.setY2min(Y3min);
-                thc4.setY2max(Y3max);
-                thc4.setN1((int) lane1.getWidth());
-                thc4.setN2((int) lane3.getWidth());
-                thc4.setM((int) lane1.getLength());
-                thc4.setScanStep(ScanStep);
-                thc4.setDirection1(HS.get(i).getDirection());
-                thc4.setShiftXForDirection1(HS.get(i).getShiftX());
-                thc4.setShiftYForDirection1(HS.get(i).getShiftY());
+            thc4.setDiscreteLane1(matrixdis5);
+            thc4.setDiscreteLane2(matrixdis4);
+            thc4.setX1min(X1minTemp);
+            thc4.setX1max(X1maxTemp);
+            thc4.setX2min(X3min);
+            thc4.setX2max(X3max);
+            thc4.setY1min(Y1minTemp);
+            thc4.setY1max(Y1maxTemp);
+            thc4.setY2min(Y3min);
+            thc4.setY2max(Y3max);
+            thc4.setN1((int) lane1.getWidth());
+            thc4.setN2((int) lane3.getWidth());
+            thc4.setM((int) lane1.getLength());
+            thc4.setScanStep(ScanStep);
+            thc4.setDirection1(HS.get(i).getDirection());
+            thc4.setShiftXForDirection1(HS.get(i).getShiftX());
+            thc4.setShiftYForDirection1(HS.get(i).getShiftY());
 
-                thc4.run();
-                templist.addAll(thc4.getHS());
+            thc4.start();
 
-                i++;
-                if (templist.size() > 0) {
-                    t = true;
-                }
+            i++;
+            if (templist.size() > 0) {
+                t = true;
             }
         }
         //direction5
         i = 0;
-        synchronized (HS) {
-            Iterator<HoldingResult> iterator1 = HS.iterator();
-            while (iterator1.hasNext() && t == false) {
-                //napravi formulu za racunanje novih min and max za novu lane
-                int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
-                int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
-                int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
-                int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
-                int X1minTemp = X1min;
-                int X1maxTemp = X1max;
-                int Y1minTemp = Y1min;
-                int Y1maxTemp = Y1max;
-                if (X1minTemp >= X2minTemp)
-                    X1minTemp = X2minTemp;
-                if (X1maxTemp <= X2maxTemp)
-                    X1maxTemp = X2maxTemp;
-                if (Y1minTemp >= Y2minTemp)
-                    Y1minTemp = Y2minTemp;
-                if (Y1maxTemp <= Y2maxTemp)
-                    Y1maxTemp = Y2maxTemp;
-                //pozovi objdeinjavanje iz discretization
-                int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
-                //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
+        iterator1 = HS.iterator();
+        while (iterator1.hasNext() && t == false) {
+            //napravi formulu za racunanje novih min and max za novu lane
+            int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
+            int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
+            int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
+            int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
+            int X1minTemp = X1min;
+            int X1maxTemp = X1max;
+            int Y1minTemp = Y1min;
+            int Y1maxTemp = Y1max;
+            if (X1minTemp >= X2minTemp)
+                X1minTemp = X2minTemp;
+            if (X1maxTemp <= X2maxTemp)
+                X1maxTemp = X2maxTemp;
+            if (Y1minTemp >= Y2minTemp)
+                Y1minTemp = Y2minTemp;
+            if (Y1maxTemp <= Y2maxTemp)
+                Y1maxTemp = Y2maxTemp;
+            //pozovi objdeinjavanje iz discretization
+            int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
+            //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
 
-                thc5.setDiscreteLane1(matrixdis5);
-                thc5.setDiscreteLane2(matrixdis4);
-                thc5.setX1min(X1minTemp);
-                thc5.setX1max(X1maxTemp);
-                thc5.setX2min(X3min);
-                thc5.setX2max(X3max);
-                thc5.setY1min(Y1minTemp);
-                thc5.setY1max(Y1maxTemp);
-                thc5.setY2min(Y3min);
-                thc5.setY2max(Y3max);
-                thc5.setN1((int) lane1.getWidth());
-                thc5.setN2((int) lane3.getWidth());
-                thc5.setM((int) lane1.getLength());
-                thc5.setScanStep(ScanStep);
-                thc5.setDirection1(HS.get(i).getDirection());
-                thc5.setShiftXForDirection1(HS.get(i).getShiftX());
-                thc5.setShiftYForDirection1(HS.get(i).getShiftY());
+            thc5.setDiscreteLane1(matrixdis5);
+            thc5.setDiscreteLane2(matrixdis4);
+            thc5.setX1min(X1minTemp);
+            thc5.setX1max(X1maxTemp);
+            thc5.setX2min(X3min);
+            thc5.setX2max(X3max);
+            thc5.setY1min(Y1minTemp);
+            thc5.setY1max(Y1maxTemp);
+            thc5.setY2min(Y3min);
+            thc5.setY2max(Y3max);
+            thc5.setN1((int) lane1.getWidth());
+            thc5.setN2((int) lane3.getWidth());
+            thc5.setM((int) lane1.getLength());
+            thc5.setScanStep(ScanStep);
+            thc5.setDirection1(HS.get(i).getDirection());
+            thc5.setShiftXForDirection1(HS.get(i).getShiftX());
+            thc5.setShiftYForDirection1(HS.get(i).getShiftY());
 
-                thc5.run();
-                templist.addAll(thc5.getHS());
+            thc5.start();
 
-                i++;
-                if (templist.size() > 0) {
-                    t = true;
-                }
+            i++;
+            if (templist.size() > 0) {
+                t = true;
             }
         }
         //direction6
         i = 0;
-        synchronized (HS) {
-            Iterator<HoldingResult> iterator1 = HS.iterator();
-            while (iterator1.hasNext() && t == false) {
-                //napravi formulu za racunanje novih min and max za novu lane
-                int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
-                int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
-                int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
-                int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
-                int X1minTemp = X1min;
-                int X1maxTemp = X1max;
-                int Y1minTemp = Y1min;
-                int Y1maxTemp = Y1max;
-                if (X1minTemp >= X2minTemp)
-                    X1minTemp = X2minTemp;
-                if (X1maxTemp <= X2maxTemp)
-                    X1maxTemp = X2maxTemp;
-                if (Y1minTemp >= Y2minTemp)
-                    Y1minTemp = Y2minTemp;
-                if (Y1maxTemp <= Y2maxTemp)
-                    Y1maxTemp = Y2maxTemp;
-                //pozovi objdeinjavanje iz discretization
-                int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
-                //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
+        iterator1 = HS.iterator();
+        while (iterator1.hasNext() && t == false) {
+            //napravi formulu za racunanje novih min and max za novu lane
+            int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
+            int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
+            int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
+            int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
+            int X1minTemp = X1min;
+            int X1maxTemp = X1max;
+            int Y1minTemp = Y1min;
+            int Y1maxTemp = Y1max;
+            if (X1minTemp >= X2minTemp)
+                X1minTemp = X2minTemp;
+            if (X1maxTemp <= X2maxTemp)
+                X1maxTemp = X2maxTemp;
+            if (Y1minTemp >= Y2minTemp)
+                Y1minTemp = Y2minTemp;
+            if (Y1maxTemp <= Y2maxTemp)
+                Y1maxTemp = Y2maxTemp;
+            //pozovi objdeinjavanje iz discretization
+            int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
+            //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
 
-                thc6.setDiscreteLane1(matrixdis5);
-                thc6.setDiscreteLane2(matrixdis4);
-                thc6.setX1min(X1minTemp);
-                thc6.setX1max(X1maxTemp);
-                thc6.setX2min(X3min);
-                thc6.setX2max(X3max);
-                thc6.setY1min(Y1minTemp);
-                thc6.setY1max(Y1maxTemp);
-                thc6.setY2min(Y3min);
-                thc6.setY2max(Y3max);
-                thc6.setN1((int) lane1.getWidth());
-                thc6.setN2((int) lane3.getWidth());
-                thc6.setM((int) lane1.getLength());
-                thc6.setScanStep(ScanStep);
-                thc6.setDirection1(HS.get(i).getDirection());
-                thc6.setShiftXForDirection1(HS.get(i).getShiftX());
-                thc6.setShiftYForDirection1(HS.get(i).getShiftY());
+            thc6.setDiscreteLane1(matrixdis5);
+            thc6.setDiscreteLane2(matrixdis4);
+            thc6.setX1min(X1minTemp);
+            thc6.setX1max(X1maxTemp);
+            thc6.setX2min(X3min);
+            thc6.setX2max(X3max);
+            thc6.setY1min(Y1minTemp);
+            thc6.setY1max(Y1maxTemp);
+            thc6.setY2min(Y3min);
+            thc6.setY2max(Y3max);
+            thc6.setN1((int) lane1.getWidth());
+            thc6.setN2((int) lane3.getWidth());
+            thc6.setM((int) lane1.getLength());
+            thc6.setScanStep(ScanStep);
+            thc6.setDirection1(HS.get(i).getDirection());
+            thc6.setShiftXForDirection1(HS.get(i).getShiftX());
+            thc6.setShiftYForDirection1(HS.get(i).getShiftY());
 
-                thc6.run();
-                templist.addAll(thc6.getHS());
+            thc6.start();
 
-                i++;
-                if (templist.size() > 0) {
-                    t = true;
+            i++;
+            if (templist.size() > 0) {
+                t = true;
 
-                }
             }
         }
         //direction7
         i = 0;
-        synchronized (HS) {
-            Iterator<HoldingResult> iterator1 = HS.iterator();
-            while (iterator1.hasNext() && t == false) {
+        iterator1 = HS.iterator();
+        while (iterator1.hasNext() && t == false) {
 
-                //napravi formulu za racunanje novih min and max za novu lane
-                int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
-                int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
-                int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
-                int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
-                int X1minTemp = X1min;
-                int X1maxTemp = X1max;
-                int Y1minTemp = Y1min;
-                int Y1maxTemp = Y1max;
-                if (X1minTemp >= X2minTemp)
-                    X1minTemp = X2minTemp;
-                if (X1maxTemp <= X2maxTemp)
-                    X1maxTemp = X2maxTemp;
-                if (Y1minTemp >= Y2minTemp)
-                    Y1minTemp = Y2minTemp;
-                if (Y1maxTemp <= Y2maxTemp)
-                    Y1maxTemp = Y2maxTemp;
-                //pozovi objdeinjavanje iz discretization
-                int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
-                //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
+            //napravi formulu za racunanje novih min and max za novu lane
+            int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
+            int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
+            int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
+            int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
+            int X1minTemp = X1min;
+            int X1maxTemp = X1max;
+            int Y1minTemp = Y1min;
+            int Y1maxTemp = Y1max;
+            if (X1minTemp >= X2minTemp)
+                X1minTemp = X2minTemp;
+            if (X1maxTemp <= X2maxTemp)
+                X1maxTemp = X2maxTemp;
+            if (Y1minTemp >= Y2minTemp)
+                Y1minTemp = Y2minTemp;
+            if (Y1maxTemp <= Y2maxTemp)
+                Y1maxTemp = Y2maxTemp;
+            //pozovi objdeinjavanje iz discretization
+            int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
+            //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
 
-                thc7.setDiscreteLane1(matrixdis5);
-                thc7.setDiscreteLane2(matrixdis4);
-                thc7.setX1min(X1minTemp);
-                thc7.setX1max(X1maxTemp);
-                thc7.setX2min(X3min);
-                thc7.setX2max(X3max);
-                thc7.setY1min(Y1minTemp);
-                thc7.setY1max(Y1maxTemp);
-                thc7.setY2min(Y3min);
-                thc7.setY2max(Y3max);
-                thc7.setN1((int) lane1.getWidth());
-                thc7.setN2((int) lane3.getWidth());
-                thc7.setM((int) lane1.getLength());
-                thc7.setScanStep(ScanStep);
-                thc7.setDirection1(HS.get(i).getDirection());
-                thc7.setShiftXForDirection1(HS.get(i).getShiftX());
-                thc7.setShiftYForDirection1(HS.get(i).getShiftY());
+            thc7.setDiscreteLane1(matrixdis5);
+            thc7.setDiscreteLane2(matrixdis4);
+            thc7.setX1min(X1minTemp);
+            thc7.setX1max(X1maxTemp);
+            thc7.setX2min(X3min);
+            thc7.setX2max(X3max);
+            thc7.setY1min(Y1minTemp);
+            thc7.setY1max(Y1maxTemp);
+            thc7.setY2min(Y3min);
+            thc7.setY2max(Y3max);
+            thc7.setN1((int) lane1.getWidth());
+            thc7.setN2((int) lane3.getWidth());
+            thc7.setM((int) lane1.getLength());
+            thc7.setScanStep(ScanStep);
+            thc7.setDirection1(HS.get(i).getDirection());
+            thc7.setShiftXForDirection1(HS.get(i).getShiftX());
+            thc7.setShiftYForDirection1(HS.get(i).getShiftY());
 
-                thc7.start();
-                templist.addAll(thc7.getHS());
+            thc7.start();
 
-                i++;
-                if (templist.size() > 0) {
-                    t = true;
-                    ;
-                }
+            i++;
+            if (templist.size() > 0) {
+                t = true;
+                ;
             }
         }
         //direction8
         i = 0;
-        synchronized (HS) {
-            Iterator<HoldingResult> iterator1 = HS.iterator();
-            while (iterator1.hasNext() && t == false) {
-                //napravi formulu za racunanje novih min and max za novu lane
-                int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
-                int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
-                int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
-                int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
-                int X1minTemp = X1min;
-                int X1maxTemp = X1max;
-                int Y1minTemp = Y1min;
-                int Y1maxTemp = Y1max;
-                if (X1minTemp >= X2minTemp)
-                    X1minTemp = X2minTemp;
-                if (X1maxTemp <= X2maxTemp)
-                    X1maxTemp = X2maxTemp;
-                if (Y1minTemp >= Y2minTemp)
-                    Y1minTemp = Y2minTemp;
-                if (Y1maxTemp <= Y2maxTemp)
-                    Y1maxTemp = Y2maxTemp;
-                //pozovi objdeinjavanje iz discretization
-                int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
-                //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
+        iterator1 = HS.iterator();
+        while (iterator1.hasNext() && t == false) {
+            //napravi formulu za racunanje novih min and max za novu lane
+            int X2minTemp = X2min + thc11.getHS().get(i).getShiftX();
+            int X2maxTemp = X2max + thc11.getHS().get(i).getShiftX();
+            int Y2minTemp = Y2min + thc11.getHS().get(i).getShiftY();
+            int Y2maxTemp = Y2max + thc11.getHS().get(i).getShiftY();
+            int X1minTemp = X1min;
+            int X1maxTemp = X1max;
+            int Y1minTemp = Y1min;
+            int Y1maxTemp = Y1max;
+            if (X1minTemp >= X2minTemp)
+                X1minTemp = X2minTemp;
+            if (X1maxTemp <= X2maxTemp)
+                X1maxTemp = X2maxTemp;
+            if (Y1minTemp >= Y2minTemp)
+                Y1minTemp = Y2minTemp;
+            if (Y1maxTemp <= Y2maxTemp)
+                Y1maxTemp = Y2maxTemp;
+            //pozovi objdeinjavanje iz discretization
+            int[][] matrixdis5 = dis1.UnitingResults(matrixdis1, matrixdis3, HS.get(i).getShiftX(), HS.get(i).getShiftY(), HS.get(i).getDirection(), n + 1, m + 1);
+            //sa novom matricom, novim min i max pozovi opet sve threadove, stim sto ces da izadjes prvi prvom rezultatu
 
-                thc8.setDiscreteLane1(matrixdis5);
-                thc8.setDiscreteLane2(matrixdis4);
-                thc8.setX1min(X1minTemp);
-                thc8.setX1max(X1maxTemp);
-                thc8.setX2min(X3min);
-                thc8.setX2max(X3max);
-                thc8.setY1min(Y1minTemp);
-                thc8.setY1max(Y1maxTemp);
-                thc8.setY2min(Y3min);
-                thc8.setY2max(Y3max);
-                thc8.setN1((int) lane1.getWidth());
-                thc8.setN2((int) lane3.getWidth());
-                thc8.setM((int) lane1.getLength());
-                thc8.setScanStep(ScanStep);
-                thc8.setDirection1(HS.get(i).getDirection());
-                thc8.setShiftXForDirection1(HS.get(i).getShiftX());
-                thc8.setShiftYForDirection1(HS.get(i).getShiftY());
+            thc8.setDiscreteLane1(matrixdis5);
+            thc8.setDiscreteLane2(matrixdis4);
+            thc8.setX1min(X1minTemp);
+            thc8.setX1max(X1maxTemp);
+            thc8.setX2min(X3min);
+            thc8.setX2max(X3max);
+            thc8.setY1min(Y1minTemp);
+            thc8.setY1max(Y1maxTemp);
+            thc8.setY2min(Y3min);
+            thc8.setY2max(Y3max);
+            thc8.setN1((int) lane1.getWidth());
+            thc8.setN2((int) lane3.getWidth());
+            thc8.setM((int) lane1.getLength());
+            thc8.setScanStep(ScanStep);
+            thc8.setDirection1(HS.get(i).getDirection());
+            thc8.setShiftXForDirection1(HS.get(i).getShiftX());
+            thc8.setShiftYForDirection1(HS.get(i).getShiftY());
 
-                thc8.start();
-                templist.addAll(thc8.getHS());
-                i++;
-                if (templist.size() > 0) {
-                    t = true;
+            thc8.start();
 
-                }
+            i++;
+            if (templist.size() > 0) {
+                t = true;
+
             }
         }
 
