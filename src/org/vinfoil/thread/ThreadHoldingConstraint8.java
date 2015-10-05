@@ -14,17 +14,7 @@ public class ThreadHoldingConstraint8 extends Thread{
 	public void run() {
 		// TODO Auto-generated method stub
 		this.HS=this.Direction8();
-		/*synchronized (HS){
-			Iterator<org.vinfoil.HoldingResult> iterator = HS.iterator();
-			System.out.println("eighth thread "+this.HS.size());
-		       while (iterator.hasNext()){
-		System.out.println("results of eight thread direction "+iterator.next().getDirection());
-		System.out.println("results of eight thread shiftX "+iterator.next().getShiftX());
-		System.out.println("results of eight thread ShiftY "+iterator.next().getShiftY());
-		
-		       }
-		}*/
-		
+		System.out.println("eight thread "+this.HS.size());
 	}
 	public ThreadHoldingConstraint8(){
 		//constructor

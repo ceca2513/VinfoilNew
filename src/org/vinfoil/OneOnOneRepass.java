@@ -118,64 +118,15 @@ public class OneOnOneRepass {
 		thc81.setY2min(Y2min);thc81.setY2max(Y2max);
 		thc81.setN1((int) lane1.getWidth());thc81.setN2((int) lane2.getWidth());
 		thc81.setM((int)lane1.getLength());thc81.setScanStep(ScanStep);
-		
 
-		/*thc11.run();
-		try{
-			thc11.join();
-			
-		}catch(Exception e){System.out.println(e);} 
-		thc21.start();
-		try{
-			thc21.join();
-			
-		}catch(Exception e){System.out.println(e);} 
-		thc31.run();
-		try{
-			thc31.join();
-			
-		}catch(Exception e){System.out.println(e);} 
-		thc41.run();
-		try{
-			thc41.join();
-			
-		}catch(Exception e){System.out.println(e);} 
-		thc51.run();
-		try{
-			thc51.join();
-			
-		}catch(Exception e){System.out.println(e);} 
-		thc61.run();
-		try{
-			thc61.join();
-			
-		}catch(Exception e){System.out.println(e);} 
-		thc71.start();
-		try{
-			thc71.join();
-			
-		}catch(Exception e){System.out.println(e);}
-		thc81.start();
-		try{
-			thc81.join();
-			
-		}catch(Exception e){System.out.println(e);}
-		HS.addAll(thc11.getHS());
-		HS.addAll(thc21.getHS());
-		HS.addAll(thc31.getHS());
-		HS.addAll(thc41.getHS());
-		HS.addAll(thc51.getHS());
-		HS.addAll(thc61.getHS());
-		HS.addAll(thc71.getHS());
-		HS.addAll(thc81.getHS());*/
 		thc11.run();
-		thc21.start();
+		thc21.run();
 		thc31.run();
 		thc41.run();
 		thc51.run();
 		thc61.run();
-		thc71.start();
-		thc81.start();
+		thc71.run();
+		thc81.run();
 		HS.addAll(thc11.getHS());
 		HS.addAll(thc21.getHS());
 		HS.addAll(thc31.getHS());

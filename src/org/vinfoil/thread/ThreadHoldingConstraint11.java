@@ -123,22 +123,7 @@ public class ThreadHoldingConstraint11 extends Thread {
 		// TODO Auto-generated method stub
 		HoldingResult temp=new HoldingResult();
 		this.HS=this.Direction1();
-		System.out.println("koliko elemenata ima "+this.Direction1().size());
-		System.out.println("koliko ima na HS "+this.HS.size());
-		synchronized (HS){
-			Iterator<HoldingResult> iterator = HS.iterator();
-			System.out.println("first thread "+this.HS.size());
-			int i=0;
-		      /* while (iterator.hasNext()){
-		    	   System.out.println("index "+i);
-		    	   i++;
-		    	   temp=iterator.next();
-		System.out.println("results of first thread direction "+temp.getDirection());
-		System.out.println("results of first thread shiftX "+temp.getShiftX());
-		System.out.println("results of first thread ShiftY "+temp.getShiftY());
-
-		       }*/
-		}
+		System.out.println("first thread "+this.HS.size());
 	}
 	public ThreadHoldingConstraint11(){
 		//constructor
