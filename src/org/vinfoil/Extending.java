@@ -234,7 +234,7 @@ public class Extending {
 	//with respect to the constraint that distance between lanes is 5mm 
 	public boolean CheckIfLaneCanBeExtended(ArrayList <FWL> lanes,FWL lane, float paperwidth, float offset){
 		boolean t=true;
-		float a=0,b=0,extension=0;
+		float extension=0;
 		float []c;
 		int j=0,k=0;
 		FWL d,e=new FWL();
@@ -322,7 +322,7 @@ public class Extending {
 		
 		ArrayList <FWL> a=new ArrayList <FWL> ();
 		int j=-1,k;
-		float e=0,f=0,extension;
+		float extension;
 		float [] g;
 		FWL b,c,d=new FWL();
 		extension=exten;
@@ -469,7 +469,7 @@ public class Extending {
 	//this is checking the extension when the extension is predefined, it is in use for rounding lanes to 10mm resolution
 	public boolean CheckIfLaneCanBeExtended2(ArrayList <FWL> lanes,FWL lane, float paperwidth,float offset, float exten){
 		boolean t=true;
-		float a=0,b=0;
+		
 		float []c;
 		int j=0,k=0;
 		FWL d,e=new FWL();
@@ -558,7 +558,7 @@ public ArrayList <FWL> ExtendingOneLane (ArrayList <FWL> lanes, FWL lane, float 
 		
 		ArrayList <FWL> a=new ArrayList <FWL> ();
 		int j=-1,k;
-		float e=0,f=0, extension;
+		float  extension;
 		float [] g;
 		FWL b,c,d=new FWL();
 		
@@ -707,8 +707,8 @@ public ArrayList <FWL> ExtendingOneLane (ArrayList <FWL> lanes, FWL lane, float 
 		ArrayList <Boolean> possibleExtension=new ArrayList <Boolean> ();
 		FWL temp1=new FWL ();
 		FWL temp2=new FWL ();
-		FWL temp3=new FWL ();
-		int numLanes=0; int mod10 = 0,numOfExtendableLanes=0;
+		
+		int numLanes=0; int mod10 = 0;
 		int possCounter=0;
 		float sum=0;
 		

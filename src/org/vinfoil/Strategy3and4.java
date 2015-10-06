@@ -35,7 +35,7 @@ public class Strategy3and4 {
 					if(i!=j){
 						FWL lane1=lanes2.get(i);
 						FWL lane2=lanes2.get(j);
-						if(lane1.getWidth()>=lane2.getWidth()){//prva lane mora da bude sira od druge lane
+						if(lane1.getWidth()>=lane2.getWidth()&&Math.abs(lane2.getEnd()-lane1.getStart())<900){//prva lane mora da bude sira od druge lane
 						OneOnOneRepass ooor=new OneOnOneRepass();
 						synchronized(HS){
 							HS=ooor.OneOnOneRepassRun(lane1, lane2, Shape, ScanStep);
@@ -55,6 +55,29 @@ public class Strategy3and4 {
 					}
 				}
 			//ovde pregledavas rezultat repassing
+			if(rstemp.size()==0){
+				//extending
+				boolean t1=false;
+				Extending e=new Extending ();
+				for(int i=0;i<lanes2.size();i++){
+					for(int j=0;j<lanes2.size();j++){
+						if(i!=j){
+							FWL lane1=lanes2.get(i);
+							FWL lane2=lanes2.get(j);
+							//fiksiranu lane rastezes po 10mm ako moze
+							if(lane1.getWidth()>lane2.getWidth()){
+								//produzavas po 10 dokle moze
+								int s=10
+								while(s+lane)
+								t1=e.CheckIfLaneCanBeExtended2(lanes2, lane1, paperwidth, offset, s);
+							}else{
+								//provers da li je produzenje do lane2.width moguce i to je prvo produzenje
+								//naredno produzenje je po 10
+							}
+						}
+					}
+				}
+			}
 			if(rstemp.size()!=0){//ako postoji makar jedno resenje
 				t=true;
 				//moram da ugradim ako ima samo jedno resenje sta onda, probbacu dva puta da ga repassujem
@@ -137,7 +160,7 @@ public class Strategy3and4 {
 			
 			//ova dva su sa najvecom sirinom ili jedina dva ili samo jedno
 		}
-		/*if(lanes2.size()>NK+3||rstemp.size()==0){
+		if(lanes2.size()>NK+3||rstemp.size()==0){
 			//ako ne onda na te lane provuces kroz sve moguce merging kombinacije
 			//na svakom od dobijenih skupova zelis da proveris repass
 			org.vinfoil.FillingCombinations fc=new org.vinfoil.FillingCombinations ();
@@ -145,9 +168,8 @@ public class Strategy3and4 {
 			tempFC=fc.FillForMerging(lanes2, NK);
 			org.vinfoil.AllPossibleCombinationWithMerging combTemp=new org.vinfoil.AllPossibleCombinationWithMerging();
 			synchronized(tempFC){
-				Iterator <org.vinfoil.AllPossibleCombinationWithMerging> iterator1= tempFC.iterator();
 				int l=0;
-				while(iterator1.hasNext()){
+				while(l<tempFC.size()){
 					combTemp=tempFC.get(l);//jedna lista svih vec mergovanih laneova, treba ispsitati repass condidion na nju
 					System.out.println("working with combination "+l);
 					ArrayList <org.vinfoil.FWL> listOfMergComb=new ArrayList <org.vinfoil.FWL>();
@@ -158,7 +180,7 @@ public class Strategy3and4 {
 								//
 								org.vinfoil.FWL lane1=listOfMergComb.get(i);
 								org.vinfoil.FWL lane2=listOfMergComb.get(j);
-								if(lane1.getWidth()>=lane2.getWidth()){//prva lane mora da bude sira od druge lane
+								if(lane1.getWidth()>=lane2.getWidth()&&Math.abs(lane2.getEnd()-lane1.getStart())<900){//prva lane mora da bude sira od druge lane
 								org.vinfoil.OneOnOneRepass ooor=new org.vinfoil.OneOnOneRepass();
 								synchronized(HS){
 									HS=ooor.OneOnOneRepassRun(lane1, lane2, Shape, ScanStep);
@@ -268,7 +290,7 @@ public class Strategy3and4 {
 			//repassing ako je moguc na koju lane se repassuje za koliko se pomera, ili ne
 			//onda pozoves joinings
 			//onda pozoves extending ali na mergovane lane sa uslovom <=NK+1
-		//}
+		}
 		if(rstemp1.size()!=0){	//uporedjujes sva resenja i izbacujes ono koje ima najmanju potrosnju
 		float width=0;
 		float [] widthlist1=new float [rstemp1.size()];
@@ -377,7 +399,7 @@ public class Strategy3and4 {
 				System.out.println("Initial foil roll  "+foilWidth);
 				}
 				
-		}*/
+		}
 		//u sva resenja racunas i resenje dobijeno iz strategije 1 i 2
 		//extendujes do okrgule 450 initial foil roll width
 		System.out.println("koliko resenja imam one lane two times "+rstemp1.size());
