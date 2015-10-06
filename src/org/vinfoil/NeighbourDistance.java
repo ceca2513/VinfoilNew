@@ -1,19 +1,26 @@
 package org.vinfoil;
 
 public class NeighbourDistance {
-	private float Neighbour1;
-	private float Neighbour2;
+	private float NeighbourLeft;
+	private float NeighbourRight;
+	private FWL Lane;
 	
-	public float getNeighbour1(){
-		return Neighbour1;
+	public float getNeighbourLeft(){
+		return NeighbourLeft;
 	}
-	public void setNeighbour1(float n){
-		Neighbour1=n;
+	public void setNeighbourLeft(float n){
+		NeighbourLeft=n;
 	}
-	public float getNeighbour2(){
-		return Neighbour2;
+	public float getNeighbourRight(){
+		return NeighbourRight;
 	}
-	public void setNeighbour2(float n){
-		Neighbour2=n;
+	public void setNeighbourRight(float n){
+		NeighbourRight=n;
+	}
+	public FWL getLane(){
+		return Lane;
+	}
+	public void setLane(FWL lane){
+		Lane=lane;
 	}
 }
